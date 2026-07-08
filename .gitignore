@@ -1,0 +1,73 @@
+# =========================
+# C++
+# =========================
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.exe
+*.out
+
+# Ejecutables
+bin/
+build/
+dist/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+Makefile
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# Base de datos
+*.db
+*.sqlite
+*.sqlite3
+database/
+data/
+
+# Configuración privada
+.env
+config/local.*
+config/secrets.*
+
+# Certificados
+*.pem
+*.key
+*.crt
+
+# Caché
+.cache/
+
+# VS Code
+.vscode/
+
+# CLion
+.idea/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Cobertura y pruebas
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+# Copias de seguridad
+*.bak
+*.old
