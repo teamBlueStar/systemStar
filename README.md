@@ -1,4 +1,5 @@
 systemStar
+v0.1
 
 systemStar es una plataforma modular para la gestión, monitoreo y rastreo de dispositivos GPS en tiempo real. Su arquitectura está diseñada para ser escalable, mantenible y preparada para soportar múltiples fabricantes de rastreadores, diferentes canales de notificación y futuras integraciones.
 

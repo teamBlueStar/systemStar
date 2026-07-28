@@ -1,3 +1,7 @@
+/**
+ * inicio de @systemStar operador central de @BlueStarcompany
+ * 
+**/ 
 #include <iostream>
 
 int main() {
