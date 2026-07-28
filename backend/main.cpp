@@ -3,12 +3,16 @@
  * 
 **/ 
 #include <iostream>
+#include "Config.h"
+using namespace std;
 
 int main() {
-    std::cout << "===================================\n";
-    std::cout << "           systemStar\n";
-    std::cout << "===================================\n";
-    std::cout << "Inicializando proyecto...\n";
+    Config config;
+
+    config.load("");
+
+    std::cout << "Puerto: " << config.getServerPort() << '\n';
+    std::cout << "Log: " << config.getLogLevel() << '\n';
 
     return 0;
 }
