@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "BlueStar Technology"
+version = "1.0.0"
+id = "artifacts/bluestar-website"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26099
+
+[services.development]
+run = "pnpm --filter @workspace/bluestar-website run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/bluestar-website", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/bluestar-website/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26099"
+BASE_PATH = "/"

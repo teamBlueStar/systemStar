@@ -3,7 +3,7 @@
  * 
 **/ 
 #include <iostream>
-#include "Config.h"
+#include "utils/Config.h"
 using namespace std;
 
 int main() {

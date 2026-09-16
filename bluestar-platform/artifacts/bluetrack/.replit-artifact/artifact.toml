@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/bluetrack/"
+title = "BlueTrack GPS"
+version = "1.0.0"
+id = "artifacts/bluetrack"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/bluetrack/" ]
+localPort = 23051
+
+[services.development]
+run = "pnpm --filter @workspace/bluetrack run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/bluetrack", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/bluetrack/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23051"
+BASE_PATH = "/bluetrack/"

@@ -1,8 +1,10 @@
-Módulo de Notificaciones
+# Módulos
 
-Responsabilidades:
-- Enviar alertas.
-- Gestionar Webhooks.
-- Configurar canales.
-- Priorizar eventos.
-- Registrar entregas.
+- `core`: ciclo de vida, eventos y registro de servicios.
+- `network`: conexiones y paquetes.
+- `protocols`: adaptadores de fabricantes.
+- `models`: modelos de dominio.
+- `repositories`: persistencia.
+- `security`: autenticación y autorización.
+- `api`: gateway para consumidores.
+- `services/notifications`: notificaciones desacopladas.

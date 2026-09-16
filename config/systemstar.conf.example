@@ -1,0 +1,20 @@
+# Copia este archivo como systemstar.conf en un entorno local.
+# No guardes credenciales, tokens o claves privadas en Git.
+
+[server]
+bind_address=0.0.0.0
+tcp_port=5027
+http_port=8080
+
+[database]
+backend=postgresql
+connection_env=DATABASE_URL
+
+[telemetry]
+deduplicate_seconds=30
+max_packet_size=4096
+default_timezone=UTC
+
+[security]
+require_device_authentication=true
+allow_unknown_devices=false

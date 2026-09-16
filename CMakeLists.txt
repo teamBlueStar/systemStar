@@ -1,10 +1,33 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
-project(systemStar VERSION 0.0.1 LANGUAGES CXX)
+project(systemStar VERSION 0.1.0 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(systemStar
-    backend/main.cpp
+option(SYSTEMSTAR_BUILD_TESTS "Build systemStar tests" ON)
+option(SYSTEMSTAR_BUILD_TOOLS "Build systemStar command-line tools" OFF)
+
+file(GLOB_RECURSE SYSTEMSTAR_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/backend/*.cpp"
 )
+
+add_executable(systemStar ${SYSTEMSTAR_SOURCES})
+target_include_directories(systemStar PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/backend"
+)
+
+if(MSVC)
+    target_compile_options(systemStar PRIVATE /W4 /permissive-)
+else()
+    target_compile_options(systemStar PRIVATE -Wall -Wextra -Wpedantic)
+endif()
+
+if(SYSTEMSTAR_BUILD_TESTS)
+    enable_testing()
+endif()
+
+message(STATUS "systemStar ${PROJECT_VERSION}")
+message(STATUS "Build tests: ${SYSTEMSTAR_BUILD_TESTS}")
+message(STATUS "Build tools: ${SYSTEMSTAR_BUILD_TOOLS}")

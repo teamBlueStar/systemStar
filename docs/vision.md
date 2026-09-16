@@ -1,5 +1,5 @@
-Plataforma de rastreo GPS en tiempo real.
-Integración con BlueTrack.
-Sistema de notificaciones multicanal.
-Arquitectura extensible para nuevos servicios.
-API para integraciones de terceros.
+# Visión
+
+Construir una plataforma confiable para que empresas de transporte conozcan el
+estado de sus activos en tiempo real, reciban alertas útiles y administren
+dispositivos, instalaciones y operaciones desde un solo ecosistema.

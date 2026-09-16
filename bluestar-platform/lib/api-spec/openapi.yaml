@@ -1,0 +1,365 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: BlueStar Technology shared API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+  - name: fleet
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /fleet/vehicles:
+    get:
+      operationId: listFleetVehicles
+      tags: [fleet]
+      responses:
+        "200":
+          description: Fleet vehicles
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FleetVehicle" } }
+    post:
+      operationId: createFleetVehicle
+      tags: [fleet]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/VehicleInput" }
+      responses:
+        "201":
+          description: Created vehicle
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FleetVehicle" }
+  /fleet/vehicles/{id}:
+    delete:
+      operationId: deleteFleetVehicle
+      tags: [fleet]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200": { description: Vehicle deleted }
+  /fleet/devices:
+    get:
+      operationId: listFleetDevices
+      tags: [fleet]
+      responses:
+        "200":
+          description: GPS devices
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FleetDevice" } }
+    post:
+      operationId: createFleetDevice
+      tags: [fleet]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/DeviceInput" }
+      responses:
+        "201":
+          description: Created device
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FleetDevice" }
+  /fleet/devices/{id}:
+    delete:
+      operationId: deleteFleetDevice
+      tags: [fleet]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200": { description: Device deleted }
+  /fleet/clients:
+    get:
+      operationId: listFleetClients
+      tags: [fleet]
+      responses:
+        "200":
+          description: Customers
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FleetClient" } }
+    post:
+      operationId: createFleetClient
+      tags: [fleet]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ClientInput" }
+      responses:
+        "201":
+          description: Created customer
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FleetClient" }
+  /fleet/users:
+    get:
+      operationId: listFleetUsers
+      tags: [fleet]
+      responses:
+        "200":
+          description: Fleet users
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FleetUser" } }
+    post:
+      operationId: createFleetUser
+      tags: [fleet]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UserInput" }
+      responses:
+        "201":
+          description: Created user
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FleetUser" }
+  /fleet/homologations:
+    get:
+      operationId: listFleetHomologations
+      tags: [fleet]
+      responses:
+        "200":
+          description: Homologations
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FleetHomologation" } }
+    post:
+      operationId: createFleetHomologation
+      tags: [fleet]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/HomologationInput" }
+      responses:
+        "201":
+          description: Created homologation
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FleetHomologation" }
+  /fleet/homologations/{id}:
+    delete:
+      operationId: deleteFleetHomologation
+      tags: [fleet]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200": { description: Homologation deleted }
+  /fleet/installation-requests:
+    get:
+      operationId: listInstallationRequests
+      tags: [fleet]
+      responses:
+        "200":
+          description: Installation requests
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FleetInstallationRequest" } }
+    post:
+      operationId: createInstallationRequest
+      tags: [fleet]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InstallationRequestInput" }
+      responses:
+        "201":
+          description: Created installation request
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FleetInstallationRequest" }
+  /fleet/installation-requests/{id}:
+    patch:
+      operationId: updateInstallationRequest
+      tags: [fleet]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InstallationRequestUpdate" }
+      responses:
+        "200":
+          description: Updated request
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FleetInstallationRequest" }
+  /fleet/reports/export:
+    get:
+      operationId: exportFleetReport
+      tags: [fleet]
+      parameters:
+        - { name: format, in: query, required: false, schema: { type: string, enum: [csv, json, pdf] } }
+      responses:
+        "200": { description: Downloadable fleet report }
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status: { type: string }
+      required: [status]
+    FleetVehicle:
+      type: object
+      properties:
+        id: { type: integer }
+        clientId: { type: integer }
+        name: { type: string }
+        plate: { type: string }
+        brand: { type: ["string", "null"] }
+        model: { type: ["string", "null"] }
+        year: { type: ["integer", "null"] }
+        driver: { type: ["string", "null"] }
+        status: { type: string }
+        speed: { type: number }
+        lat: { type: number }
+        lng: { type: number }
+        address: { type: ["string", "null"] }
+        lastSeen: { type: ["string", "null"], format: date-time }
+        deviceId: { type: ["integer", "null"] }
+        homologationStatus: { type: string }
+      required: [id, clientId, name, plate, status, speed, lat, lng, homologationStatus]
+    VehicleInput:
+      type: object
+      required: [clientId, name, plate]
+      properties:
+        clientId: { type: integer }
+        name: { type: string, minLength: 1 }
+        plate: { type: string, minLength: 1 }
+        brand: { type: string }
+        model: { type: string }
+        year: { type: integer }
+        driver: { type: string }
+        status: { type: string }
+    FleetDevice:
+      type: object
+      properties:
+        id: { type: integer }
+        clientId: { type: integer }
+        vehicleId: { type: ["integer", "null"] }
+        imei: { type: string }
+        model: { type: string }
+        status: { type: string }
+        signal: { type: integer }
+        simCard: { type: ["string", "null"] }
+        firmwareVersion: { type: ["string", "null"] }
+      required: [id, clientId, imei, model, status, signal]
+    DeviceInput:
+      type: object
+      required: [clientId, imei, model]
+      properties:
+        clientId: { type: integer }
+        vehicleId: { type: integer }
+        imei: { type: string }
+        model: { type: string }
+        simCard: { type: string }
+        firmwareVersion: { type: string }
+    FleetClient:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        contactEmail: { type: string }
+        plan: { type: string }
+        status: { type: string }
+        features:
+          type: object
+          additionalProperties: { type: boolean }
+      required: [id, name, contactEmail, plan, status, features]
+    ClientInput:
+      type: object
+      required: [name, contactEmail]
+      properties:
+        name: { type: string }
+        contactEmail: { type: string }
+        plan: { type: string }
+        features:
+          type: object
+          additionalProperties: { type: boolean }
+    UserInput:
+      type: object
+      required: [name, email, password, role]
+      properties:
+        name: { type: string }
+        email: { type: string }
+        password: { type: string, minLength: 8 }
+        role: { type: string, enum: [admin, tech, cliente] }
+        clientId: { type: integer }
+    FleetUser:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string }
+        role: { type: string }
+        clientId: { type: ["integer", "null"] }
+        active: { type: boolean }
+      required: [id, name, email, role, active]
+    HomologationInput:
+      type: object
+      required: [clientId, type]
+      properties:
+        clientId: { type: integer }
+        vehicleId: { type: integer }
+        type: { type: string }
+        status: { type: string }
+        details: { type: string }
+    FleetHomologation:
+      type: object
+      properties:
+        id: { type: integer }
+        clientId: { type: integer }
+        vehicleId: { type: ["integer", "null"] }
+        type: { type: string }
+        status: { type: string }
+        details: { type: ["string", "null"] }
+      required: [id, clientId, type, status]
+    InstallationRequestInput:
+      type: object
+      required: [scheduledDate, timeSlot, address]
+      properties:
+        clientId: { type: integer }
+        vehicleId: { type: integer }
+        deviceId: { type: integer }
+        scheduledDate: { type: string, format: date }
+        timeSlot: { type: string }
+        address: { type: string }
+        notes: { type: string }
+    FleetInstallationRequest:
+      type: object
+      properties:
+        id: { type: integer }
+        clientId: { type: integer }
+        vehicleId: { type: ["integer", "null"] }
+        scheduledDate: { type: string, format: date }
+        timeSlot: { type: string }
+        address: { type: string }
+        notes: { type: ["string", "null"] }
+        status: { type: string }
+      required: [id, clientId, scheduledDate, timeSlot, address, status]
+    InstallationRequestUpdate:
+      type: object
+      required: [status]
+      properties:
+        status: { type: string }
