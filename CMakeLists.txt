@@ -14,6 +14,7 @@ file(GLOB_RECURSE SYSTEMSTAR_SOURCES CONFIGURE_DEPENDS
 )
 
 add_executable(systemStar ${SYSTEMSTAR_SOURCES})
+
 target_include_directories(systemStar PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/backend"
 )
@@ -26,8 +27,30 @@ endif()
 
 if(SYSTEMSTAR_BUILD_TESTS)
     enable_testing()
+
+    add_executable(test_packet_position
+        tests/test_packet_position.cpp
+        backend/network/Packet.cpp
+        backend/models/Position.cpp
+    )
+
+    target_include_directories(test_packet_position PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/backend"
+    )
+
+    if(MSVC)
+        target_compile_options(test_packet_position PRIVATE /W4 /permissive-)
+    else()
+        target_compile_options(test_packet_position PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(
+        NAME test_packet_position
+        COMMAND test_packet_position
+    )
 endif()
 
 message(STATUS "systemStar ${PROJECT_VERSION}")
 message(STATUS "Build tests: ${SYSTEMSTAR_BUILD_TESTS}")
 message(STATUS "Build tools: ${SYSTEMSTAR_BUILD_TOOLS}")
+
