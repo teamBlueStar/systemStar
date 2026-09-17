@@ -336,3 +336,83 @@ docs/progreso-desarrollo.md
 
 CHANGELOG.md
     → Historial resumido de cambios
+
+---
+
+[0.1.0] — Logger
+
+Añadido
+
+backend/utils/Logger.h
+backend/utils/Logger.cpp
+
+tests/test_logger.cpp
+
+Modificado
+
+CMakeLists.txt
+docs/modulos.md
+docs/plan-fase-1.md
+docs/progreso-desarrollo.md
+
+Cambios
+
+- Implementado Logger básico.
+- Añadidos niveles INFO, WARNING y ERROR.
+- Añadida salida por consola.
+- Añadida salida a archivo.
+- Añadida prueba automatizada.
+- Integrado test_logger con CTest.
+- Validada generación de build/test_logger.log.
+
+Tests
+
+Comando:
+
+ctest --test-dir build --output-on-failure
+
+Resultado:
+
+2/2 tests passed
+0 tests failed
+
+Pendiente
+
+- Implementar filtrado mediante minimumLevel.
+
+Resultado
+
+Logger básico implementado y validado.
+
+Estado:
+
+PARCIAL
+
+[0.1.0] — Logger — Finalización
+
+Cambios
+
+- Implementado filtrado mediante minimumLevel.
+- Definida prioridad INFO < WARNING < ERROR.
+- Añadidas pruebas para los tres niveles mínimos.
+- Validado el filtrado mediante CTest.
+
+Tests
+
+- test_packet_position: PASS
+- test_logger: PASS
+- 2/2 tests passed
+
+Resultado
+
+Logger [1.3] completado y validado.
+
+Estado:
+
+COMPLETADO
+
+---
+
+Siguiente paso
+
+Completar Logger [1.3] implementando el filtrado mediante minimumLevel y añadir la prueba correspondiente.

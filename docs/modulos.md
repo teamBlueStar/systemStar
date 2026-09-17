@@ -8,3 +8,4 @@
 - `security`: autenticación y autorización.
 - `api`: gateway para consumidores.
 - `services/notifications`: notificaciones desacopladas.
+- `utils`: utilidades compartidas del núcleo, incluyendo configuración y logging.

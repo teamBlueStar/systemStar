@@ -618,3 +618,260 @@ roadmap.md
 
 progreso-desarrollo.md
     → qué hemos hecho realmente y qué fue validado
+
+---
+
+21. Implementación de Logger
+
+Componente
+
+backend/utils/Logger
+
+Estado
+
+PARCIAL
+
+Responsabilidad
+
+Logger registra eventos del sistema en:
+
+- consola;
+- archivo de log.
+
+Niveles implementados
+
+INFO
+WARNING
+ERROR
+
+Archivos creados
+
+backend/utils/Logger.h
+backend/utils/Logger.cpp
+
+Tests
+
+tests/test_logger.cpp
+
+API actual
+
+Logger(
+    const std::string& logFile,
+    const std::string& minimumLevel
+);
+
+Métodos:
+
+info()
+warning()
+error()
+
+Implementación
+
+El Logger recibe la ruta del archivo de log y el nivel mínimo configurado.
+
+Los mensajes se formatean como:
+
+[INFO] mensaje
+[WARNING] mensaje
+[ERROR] mensaje
+
+Cada mensaje se envía a la consola.
+
+Cuando el archivo de log está disponible, también se escribe en él.
+
+El archivo se abre en modo append para conservar registros anteriores.
+
+Pendiente
+
+El valor minimumLevel actualmente se almacena, pero todavía no se utiliza para filtrar mensajes.
+
+Por ejemplo, un Logger configurado con nivel WARNING todavía permite registrar mensajes INFO.
+
+Esta funcionalidad queda pendiente para completar el componente.
+
+---
+
+22. Prueba automatizada de Logger
+
+Archivo
+
+tests/test_logger.cpp
+
+La prueba verifica:
+
+- creación del Logger;
+- registro INFO;
+- registro WARNING;
+- registro ERROR;
+- generación del archivo de log;
+- contenido de los mensajes registrados.
+
+Integración CMake
+
+Se añadió el ejecutable:
+
+test_logger
+
+utilizando:
+
+tests/test_logger.cpp
+backend/utils/Logger.cpp
+
+También se registró mediante CTest:
+
+add_test(
+    NAME test_logger
+    COMMAND test_logger
+)
+
+Validación
+
+Comando:
+
+ctest --test-dir build --output-on-failure
+
+Resultado:
+
+2/2 tests passed
+0 tests failed
+
+Pruebas:
+
+test_packet_position: PASS
+test_logger: PASS
+
+Archivo generado:
+
+build/test_logger.log
+
+Contenido validado:
+
+[INFO] Mensaje de información
+[WARNING] Mensaje de advertencia
+[ERROR] Mensaje de error
+
+Resultado
+
+La implementación básica de Logger funciona correctamente.
+
+Estado:
+
+PARCIAL
+
+Motivo:
+
+Queda pendiente implementar el filtrado mediante minimumLevel.
+
+---
+
+23. Estado actualizado del proyecto
+
+Arquitectura base .............. ✅
+CMake .......................... ✅
+Packet ......................... ✅
+Position ....................... ✅
+Logger ......................... 🟡
+Infraestructura CTest .......... ✅
+Tests Packet/Position .......... ✅
+Test Logger .................... ✅
+Compilación .................... ✅
+Validación ..................... ✅ 2/2
+
+Config ......................... 🟡
+Bootstrap ...................... ⏳
+Application .................... ⏳
+Manejo de errores .............. ⏳
+Utilidades ..................... 🟡
+
+Network ........................ ⏳
+Protocolos GPS ................. ⏳
+Persistencia ................... ⏳
+Servicios ...................... ⏳
+API ............................ ⏳
+BlueTrack integración .......... ⏳
+
+---
+
+24. Siguiente paso
+
+Completar Logger [1.3].
+
+Pendiente:
+
+- implementar filtrado mediante minimumLevel;
+- añadir prueba específica del filtrado;
+- recompilar;
+- ejecutar CTest;
+- revisar nuevamente el componente;
+- actualizar documentación;
+- realizar commit.
+
+Después de cerrar Logger se continuará con el siguiente componente definido en la planificación de Fase 1.
+
+---
+
+## 25. Finalización de Logger
+
+Fecha:
+2026-09-16
+
+Componente:
+Logger [1.3]
+
+Estado:
+COMPLETADO
+
+Cambios:
+
+- Implementado filtrado mediante minimumLevel.
+- Definida prioridad INFO < WARNING < ERROR.
+- Los mensajes inferiores al nivel mínimo son descartados.
+- Los mensajes aceptados continúan registrándose en consola y archivo.
+- Los niveles desconocidos se tratan como ERROR.
+
+Comportamiento:
+
+minimumLevel INFO:
+- INFO registrado.
+- WARNING registrado.
+- ERROR registrado.
+
+minimumLevel WARNING:
+- INFO filtrado.
+- WARNING registrado.
+- ERROR registrado.
+
+minimumLevel ERROR:
+- INFO filtrado.
+- WARNING filtrado.
+- ERROR registrado.
+
+Pruebas:
+
+test_logger:
+PASS
+
+test_packet_position:
+PASS
+
+Resultado CTest:
+
+2/2 tests passed
+0 tests failed
+
+Compilación:
+
+cmake -S . -B build
+PASS
+
+cmake --build build
+PASS
+
+Conclusión:
+
+Logger [1.3] queda completado y validado.
+
+Siguiente estado:
+
+1.3 Logger → 🟢 COMPLETADO

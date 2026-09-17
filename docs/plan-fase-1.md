@@ -21,12 +21,19 @@ Estado: PARCIAL
 - Falta implementar lectura real del archivo de configuración.
 
 [1.3] Logger
-Estado: PENDIENTE
+Estado: COMPLETADO
 
-- Registrar información.
-- Registrar advertencias.
-- Registrar errores.
-- Consola y archivo.
+- Clase Logger implementada.
+- Nivel INFO implementado.
+- Nivel WARNING implementado.
+- Nivel ERROR implementado.
+- Salida por consola implementada.
+- Salida a archivo implementada.
+- Filtrado mediante minimumLevel implementado.
+- Niveles ordenados por severidad: INFO < WARNING < ERROR.
+- Nivel desconocido tratado como ERROR.
+- Prueba automatizada implementada.
+- Pruebas de filtrado verificadas correctamente con CTest.
 
 [1.4] Bootstrap
 Estado: PENDIENTE
@@ -63,8 +70,10 @@ Estado: EN PROGRESO
 - CTest configurado.
 - Test de Packet completado.
 - Test de Position completado.
-- Faltan pruebas de Config, Logger, Bootstrap y Application.
-
+- Test de Logger completado.
+- Config pendiente de prueba.
+- Bootstrap pendiente de prueba.
+- Application pendiente de prueba.
 
 ## Trabajo completado adicional
 
@@ -101,16 +110,24 @@ Compilación:
 OK
 
 CTest:
-1/1 pruebas pasadas
+2/2 pruebas pasadas
 
+- test_packet_position: PASS
+- test_logger: PASS
 
 ## Próximo objetivo
 
-Completar Config [1.2].
+Cerrar Logger [1.3].
 
-Después continuar:
+Pendiente:
 
-1.3 Logger
+- Implementar filtrado mediante minimumLevel.
+- Añadir prueba específica para el filtrado de niveles.
+- Volver a ejecutar CMake y CTest.
+- Documentar la finalización de Logger.
+
+Después continuar con:
+
 1.6 Manejo de errores
 1.4 Bootstrap
 1.5 Application
