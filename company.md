@@ -14,6 +14,7 @@ Especialización:
 • Aplicaciones móviles
 • API REST
 • Monitoreo en tiempo real
+• Testing de red y seguridad
 
 Productos:
 • systemStar
