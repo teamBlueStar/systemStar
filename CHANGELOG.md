@@ -454,3 +454,45 @@ Bootstrap [1.4] completado y validado.
 Estado:
 
 COMPLETADO
+
+---
+
+[0.1.0] — Application
+
+Añadido
+
+backend/core/Application.h
+backend/core/Application.cpp
+
+tests/test_application.cpp
+
+Modificado
+
+CMakeLists.txt
+docs/plan-fase-1.md
+docs/progreso-desarrollo.md
+
+Cambios
+
+- Implementado Application [1.5].
+- Implementado control básico del ciclo de vida.
+- Implementados run() y stop().
+- Añadido bucle principal con espera controlada.
+- Añadida prueba automatizada.
+- Integrado test_application con CTest.
+
+Tests
+
+- test_packet_position: PASS
+- test_logger: PASS
+- test_bootstrap: PASS
+- test_application: PASS
+- 4/4 tests passed
+
+Resultado
+
+Application [1.5] completado y validado.
+
+Estado:
+
+COMPLETADO

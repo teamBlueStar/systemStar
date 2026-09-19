@@ -48,11 +48,14 @@ Estado: COMPLETADO
 - Prueba de inicialización y escritura del log verificada correctamente con CTest.
 
 [1.5] Application
-Estado: PENDIENTE
+Estado: COMPLETADO
 
-- Controlar ciclo de vida.
-- Ejecutar bucle principal.
-- Gestionar apagado seguro.
+- Se implementó el ciclo de vida.
+- run() mantiene el ciclo activo.
+- stop() solicita el cierre.
+- Se evita un busy loop mediante una espera controlada.
+- Existe prueba automatizada.
+- CTest verificó correctamente Application.
 
 [1.6] Manejo de errores
 Estado: PENDIENTE
@@ -76,8 +79,8 @@ Estado: EN PROGRESO
 - Test de Position completado.
 - Test de Logger completado.
 - Test de Bootstrap completado.
+- Test de Application completado.
 - Config pendiente de prueba.
-- Application pendiente de prueba.
 
 ## Trabajo completado adicional
 
@@ -114,20 +117,20 @@ Compilación:
 OK
 
 CTest:
-3/3 pruebas pasadas
+4/4 pruebas pasadas
 
 - test_packet_position: PASS
 - test_logger: PASS
 - test_bootstrap: PASS
+- test_application: PASS
 
 ## Próximo objetivo
 
-La implementación de Bootstrap [1.4] ha sido completada y validada.
+La implementación de Application [1.5] ha sido completada y validada.
 
 Componentes pendientes de Fase 1:
 
 1.2 Config
-1.5 Application
 1.6 Manejo de errores
 1.7 Utilidades
 1.8 Pruebas del núcleo

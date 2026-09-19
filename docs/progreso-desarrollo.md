@@ -960,3 +960,124 @@ Siguiente estado:
 
 1.3 Logger → 🟢 COMPLETADO
 1.4 Bootstrap → 🟢 COMPLETADO
+
+---
+
+## 27. Implementación de Application
+
+Fecha:
+2026-09-19
+
+Componente:
+Application [1.5]
+
+Estado:
+COMPLETADO
+
+Objetivo:
+
+Implementar Application como responsable del ciclo de vida principal de systemStar.
+
+Application permite iniciar la ejecución, mantener el ciclo activo y solicitar un apagado controlado.
+
+Application no se encarga de:
+
+- configuración;
+- logging;
+- red;
+- protocolos GPS;
+- persistencia;
+- API;
+- EventBus;
+- ModuleManager;
+- ServiceRegistry.
+
+Auditoría:
+
+- Application.h estaba vacío.
+- Application.cpp estaba vacío.
+- No existían referencias previas a Application en código ni tests.
+- La documentación existente establecía que Application debía controlar el ciclo de vida y ejecutar el bucle principal.
+
+Diseño:
+
+Se definió una API mínima:
+
+Application();
+void run();
+void stop();
+
+El estado interno utiliza:
+
+std::atomic<bool> running_;
+
+El ciclo principal utiliza una espera controlada para evitar un busy loop.
+
+Implementación:
+
+- Creado backend/core/Application.h.
+- Creado backend/core/Application.cpp.
+- Implementados constructor, run() y stop().
+- Implementado control básico del ciclo de vida.
+
+Prueba:
+
+- Creado tests/test_application.cpp.
+- La prueba ejecuta run() en un hilo de prueba.
+- Se solicita stop().
+- Se espera la finalización mediante join().
+- Añadido test_application a CMake.
+- Añadido test_application a CTest.
+
+Compilación:
+
+cmake -S . -B build
+PASS
+
+cmake --build build
+PASS
+
+Targets compilados:
+
+- systemStar
+- test_packet_position
+- test_logger
+- test_bootstrap
+- test_application
+
+Pruebas:
+
+test_packet_position:
+PASS
+
+test_logger:
+PASS
+
+test_bootstrap:
+PASS
+
+test_application:
+PASS
+
+Resultado CTest:
+
+4/4 tests passed
+0 tests failed
+100% tests passed
+
+Conclusión:
+
+Application [1.5] queda completado y validado.
+
+Siguiente estado:
+
+1.3 Logger → 🟢 COMPLETADO
+1.4 Bootstrap → 🟢 COMPLETADO
+1.5 Application → 🟢 COMPLETADO
+
+Componentes pendientes de Fase 1:
+
+1.2 Config
+1.6 Manejo de errores
+1.7 Utilidades
+1.8 Pruebas del núcleo
