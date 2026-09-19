@@ -48,6 +48,7 @@ if(SYSTEMSTAR_BUILD_TESTS)
         NAME test_packet_position
         COMMAND test_packet_position
     )
+
     add_executable(test_logger
         tests/test_logger.cpp
         backend/utils/Logger.cpp
@@ -67,9 +68,30 @@ if(SYSTEMSTAR_BUILD_TESTS)
         NAME test_logger
         COMMAND test_logger
     )
+
+    add_executable(test_bootstrap
+        tests/test_bootstrap.cpp
+        backend/core/Bootstrap.cpp
+        backend/utils/Config.cpp
+        backend/utils/Logger.cpp
+    )
+
+    target_include_directories(test_bootstrap PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/backend"
+    )
+
+    if(MSVC)
+        target_compile_options(test_bootstrap PRIVATE /W4 /permissive-)
+    else()
+        target_compile_options(test_bootstrap PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(
+        NAME test_bootstrap
+        COMMAND test_bootstrap
+    )
 endif()
 
 message(STATUS "systemStar ${PROJECT_VERSION}")
 message(STATUS "Build tests: ${SYSTEMSTAR_BUILD_TESTS}")
 message(STATUS "Build tools: ${SYSTEMSTAR_BUILD_TOOLS}")
-

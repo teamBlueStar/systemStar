@@ -36,12 +36,16 @@ Estado: COMPLETADO
 - Pruebas de filtrado verificadas correctamente con CTest.
 
 [1.4] Bootstrap
-Estado: PENDIENTE
+Estado: COMPLETADO
 
-- Inicializar módulos.
-- Validar configuración.
-- Inicializar Logger.
-- Preparar Application.
+- Clase Bootstrap implementada.
+- Recibe una referencia a Config.
+- Recibe externamente la ruta del archivo de log.
+- Inicializa Logger utilizando el nivel definido por Config.
+- No realiza lectura de archivos de configuración.
+- No inicializa Application, EventBus, ModuleManager ni ServiceRegistry.
+- Prueba automatizada implementada.
+- Prueba de inicialización y escritura del log verificada correctamente con CTest.
 
 [1.5] Application
 Estado: PENDIENTE
@@ -71,8 +75,8 @@ Estado: EN PROGRESO
 - Test de Packet completado.
 - Test de Position completado.
 - Test de Logger completado.
+- Test de Bootstrap completado.
 - Config pendiente de prueba.
-- Bootstrap pendiente de prueba.
 - Application pendiente de prueba.
 
 ## Trabajo completado adicional
@@ -110,28 +114,22 @@ Compilación:
 OK
 
 CTest:
-2/2 pruebas pasadas
+3/3 pruebas pasadas
 
 - test_packet_position: PASS
 - test_logger: PASS
+- test_bootstrap: PASS
 
 ## Próximo objetivo
 
-Cerrar Logger [1.3].
+La implementación de Bootstrap [1.4] ha sido completada y validada.
 
-Pendiente:
+Componentes pendientes de Fase 1:
 
-- Implementar filtrado mediante minimumLevel.
-- Añadir prueba específica para el filtrado de niveles.
-- Volver a ejecutar CMake y CTest.
-- Documentar la finalización de Logger.
-
-Después continuar con:
-
-1.6 Manejo de errores
-1.4 Bootstrap
+1.2 Config
 1.5 Application
+1.6 Manejo de errores
 1.7 Utilidades
 1.8 Pruebas del núcleo
 
-Después comenzar Network.
+El siguiente componente será seleccionado antes de continuar el desarrollo.

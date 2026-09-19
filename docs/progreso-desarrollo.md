@@ -875,3 +875,88 @@ Logger [1.3] queda completado y validado.
 Siguiente estado:
 
 1.3 Logger → 🟢 COMPLETADO
+
+---
+
+## 26. Implementación de Bootstrap
+
+Fecha:
+2026-09-18
+
+Componente:
+Bootstrap [1.4]
+
+Estado:
+COMPLETADO
+
+Objetivo:
+
+Crear el punto de inicialización básica del núcleo sin asumir responsabilidades pertenecientes a otros componentes.
+
+Diseño:
+
+Bootstrap recibe:
+
+- una referencia a Config;
+- una ruta de archivo para Logger.
+
+Bootstrap no realiza:
+
+- lectura del archivo de configuración;
+- ejecución de Application;
+- inicialización de EventBus;
+- inicialización de ModuleManager;
+- inicialización de ServiceRegistry.
+
+Implementación:
+
+- Creado backend/core/Bootstrap.h.
+- Creado backend/core/Bootstrap.cpp.
+- Bootstrap crea Logger utilizando el nivel obtenido desde Config.
+- Bootstrap registra el mensaje de inicialización mediante Logger.
+- initialize() devuelve true cuando la inicialización se completa.
+
+Prueba:
+
+- Creado tests/test_bootstrap.cpp.
+- Añadido test_bootstrap a CMake.
+- Añadido test_bootstrap a CTest.
+- Verificada la generación del archivo de log.
+- Verificado el mensaje "[INFO] Bootstrap inicializado.".
+
+Compilación:
+
+cmake -S . -B build
+PASS
+
+cmake --build build
+PASS
+
+La primera compilación produjo un warning por una variable local no utilizada en el test. Se corrigió eliminando la variable y utilizando directamente assert(bootstrap.initialize()).
+
+La compilación posterior terminó sin warnings.
+
+Pruebas:
+
+test_packet_position:
+PASS
+
+test_logger:
+PASS
+
+test_bootstrap:
+PASS
+
+Resultado CTest:
+
+3/3 tests passed
+0 tests failed
+
+Conclusión:
+
+Bootstrap [1.4] queda completado y validado.
+
+Siguiente estado:
+
+1.3 Logger → 🟢 COMPLETADO
+1.4 Bootstrap → 🟢 COMPLETADO

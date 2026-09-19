@@ -416,3 +416,41 @@ COMPLETADO
 Siguiente paso
 
 Completar Logger [1.3] implementando el filtrado mediante minimumLevel y añadir la prueba correspondiente.
+
+---
+
+[0.1.0] — Bootstrap
+
+Añadido
+
+backend/core/Bootstrap.h
+backend/core/Bootstrap.cpp
+
+tests/test_bootstrap.cpp
+
+Modificado
+
+CMakeLists.txt
+
+Cambios
+
+- Implementado Bootstrap [1.4].
+- Bootstrap recibe Config y la ruta del archivo de log.
+- Inicialización de Logger mediante la configuración existente.
+- Añadido mensaje de inicialización.
+- Integrado test_bootstrap con CTest.
+
+Tests
+
+- test_packet_position: PASS
+- test_logger: PASS
+- test_bootstrap: PASS
+- 3/3 tests passed
+
+Resultado
+
+Bootstrap [1.4] completado y validado.
+
+Estado:
+
+COMPLETADO
