@@ -111,6 +111,25 @@ if(SYSTEMSTAR_BUILD_TESTS)
         COMMAND test_application
     )
 
+    add_executable(test_config
+        tests/test_config.cpp
+        backend/utils/Config.cpp
+    )
+
+    target_include_directories(test_config PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/backend"
+    )
+
+    if(MSVC)
+        target_compile_options(test_config PRIVATE /W4 /permissive-)
+    else()
+        target_compile_options(test_config PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(
+        NAME test_config
+        COMMAND test_config
+    )
 endif()
 
 message(STATUS "systemStar ${PROJECT_VERSION}")

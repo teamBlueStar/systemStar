@@ -496,3 +496,49 @@ Application [1.5] completado y validado.
 Estado:
 
 COMPLETADO
+
+---
+
+[0.1.0] — Config
+
+Añadido
+
+tests/test_config.cpp
+
+tests/data/config_valid.conf
+tests/data/config_invalid_port.conf
+tests/data/config_invalid_value.conf
+
+Modificado
+
+backend/utils/Config.cpp
+CMakeLists.txt
+docs/plan-fase-1.md
+docs/progreso-desarrollo.md
+
+Cambios
+
+- Implementada lectura real de configuración.
+- Implementado parser INI propio.
+- Implementada lectura de server/tcp_port.
+- Añadida validación del puerto.
+- Los errores conservan la configuración anterior.
+- Añadidas pruebas automatizadas.
+- Integrado test_config con CTest.
+
+Tests
+
+- test_packet_position: PASS
+- test_logger: PASS
+- test_bootstrap: PASS
+- test_application: PASS
+- test_config: PASS
+- 5/5 tests passed
+
+Resultado
+
+Config [1.2] completado y validado.
+
+Estado:
+
+COMPLETADO

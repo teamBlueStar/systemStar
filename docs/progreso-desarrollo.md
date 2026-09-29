@@ -1081,3 +1081,151 @@ Componentes pendientes de Fase 1:
 1.6 Manejo de errores
 1.7 Utilidades
 1.8 Pruebas del núcleo
+
+---
+
+## 28. Implementación de Config
+
+Fecha:
+2026-09-25
+
+Componente:
+Config [1.2]
+
+Estado:
+COMPLETADO
+
+Objetivo:
+
+Implementar la lectura real de configuración mediante un parser INI propio.
+
+Cambios:
+
+- Implementada lectura mediante std::ifstream.
+- Implementado parser INI básico.
+- Implementada lectura de la sección [server].
+- Implementada lectura de tcp_port.
+- Implementada validación del puerto entre 1 y 65535.
+- Los errores de carga no modifican la configuración existente.
+- Se mantiene el valor por defecto de serverPort en 5000.
+
+Archivos modificados:
+
+backend/utils/Config.cpp
+CMakeLists.txt
+
+Archivos creados:
+
+tests/test_config.cpp
+tests/data/config_valid.conf
+tests/data/config_invalid_port.conf
+tests/data/config_invalid_value.conf
+
+Pruebas:
+
+- test_packet_position: PASS
+- test_logger: PASS
+- test_bootstrap: PASS
+- test_application: PASS
+- test_config: PASS
+
+Resultado CTest:
+
+5/5 tests passed
+0 tests failed
+100% tests passed
+
+Validación adicional:
+
+git diff --check: PASS
+
+Conclusión:
+
+Config [1.2] queda completado y validado.
+
+Siguiente estado:
+
+1.2 Config → 🟢 COMPLETADO
+1.3 Logger → 🟢 COMPLETADO
+1.4 Bootstrap → 🟢 COMPLETADO
+1.5 Application → 🟢 COMPLETADO
+
+Componentes pendientes de Fase 1:
+
+1.6 Manejo de errores
+1.7 Utilidades
+1.8 Pruebas del núcleo
+
+---
+
+## 28. Implementación de Config
+
+Fecha:
+2026-09-25
+
+Componente:
+Config [1.2]
+
+Estado:
+COMPLETADO
+
+Objetivo:
+
+Implementar la lectura real de configuración mediante un parser INI propio.
+
+Cambios:
+
+- Implementada lectura mediante std::ifstream.
+- Implementado parser INI básico.
+- Implementada lectura de la sección [server].
+- Implementada lectura de tcp_port.
+- Implementada validación del puerto entre 1 y 65535.
+- Los errores de carga no modifican la configuración existente.
+- Se mantiene el valor por defecto de serverPort en 5000.
+
+Archivos modificados:
+
+backend/utils/Config.cpp
+CMakeLists.txt
+
+Archivos creados:
+
+tests/test_config.cpp
+tests/data/config_valid.conf
+tests/data/config_invalid_port.conf
+tests/data/config_invalid_value.conf
+
+Pruebas:
+
+- test_packet_position: PASS
+- test_logger: PASS
+- test_bootstrap: PASS
+- test_application: PASS
+- test_config: PASS
+
+Resultado CTest:
+
+5/5 tests passed
+0 tests failed
+100% tests passed
+
+Validación adicional:
+
+git diff --check: PASS
+
+Conclusión:
+
+Config [1.2] queda completado y validado.
+
+Siguiente estado:
+
+1.2 Config → 🟢 COMPLETADO
+1.3 Logger → 🟢 COMPLETADO
+1.4 Bootstrap → 🟢 COMPLETADO
+1.5 Application → 🟢 COMPLETADO
+
+Componentes pendientes de Fase 1:
+
+1.6 Manejo de errores
+1.7 Utilidades
+1.8 Pruebas del núcleo

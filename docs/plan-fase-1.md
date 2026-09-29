@@ -12,13 +12,17 @@ Estado: COMPLETADO
 - El proyecto compila correctamente.
 
 [1.2] Config
-Estado: PARCIAL
+Estado: COMPLETADO
 
-- Clase Config creada.
-- Puerto del servidor definido.
-- Nivel de logs definido.
-- Ruta de datos definida.
-- Falta implementar lectura real del archivo de configuración.
+- Clase Config implementada.
+- Valores por defecto definidos.
+- Lectura del archivo de configuración implementada.
+- Parser INI propio implementado.
+- Lectura de [server] tcp_port implementada.
+- Validación del puerto entre 1 y 65535.
+- Los errores de carga conservan la configuración anterior.
+- Prueba automatizada implementada.
+- CTest verificó correctamente Config.
 
 [1.3] Logger
 Estado: COMPLETADO
@@ -80,7 +84,7 @@ Estado: EN PROGRESO
 - Test de Logger completado.
 - Test de Bootstrap completado.
 - Test de Application completado.
-- Config pendiente de prueba.
+- Test de Config completado.
 
 ## Trabajo completado adicional
 
@@ -130,7 +134,6 @@ La implementación de Application [1.5] ha sido completada y validada.
 
 Componentes pendientes de Fase 1:
 
-1.2 Config
 1.6 Manejo de errores
 1.7 Utilidades
 1.8 Pruebas del núcleo
