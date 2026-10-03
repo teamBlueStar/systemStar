@@ -194,6 +194,29 @@ if(SYSTEMSTAR_BUILD_TESTS)
         NAME test_session
         COMMAND test_session
     )
+
+    add_executable(test_connection_manager
+        tests/test_connection_manager.cpp
+        backend/network/Socket.cpp
+        backend/network/TCPServer.cpp
+        backend/network/Session.cpp
+        backend/network/ConnectionManager.cpp
+    )
+
+    target_include_directories(test_connection_manager PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/backend"
+    )
+
+    if(MSVC)
+        target_compile_options(test_connection_manager PRIVATE /W4 /permissive-)
+    else()
+        target_compile_options(test_connection_manager PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(
+        NAME test_connection_manager
+        COMMAND test_connection_manager
+    )
 endif()
 
 message(STATUS "systemStar ${PROJECT_VERSION}")

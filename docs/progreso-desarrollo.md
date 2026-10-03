@@ -1372,6 +1372,65 @@ Estado de Network:
 - Session ⚪
 - ConnectionManager ⚪
 
+## Avance: ConnectionManager
+
+### Estado
+🟢 Completado
+
+### Implementación
+Se implementó `systemstar::ConnectionManager` para gestionar múltiples sesiones TCP activas.
+
+Responsabilidades actuales:
+- Poseer las sesiones administradas.
+- Asignar identificadores internos de conexión.
+- Recuperar una sesión mediante su identificador.
+- Eliminar una conexión individual.
+- Limpiar todas las conexiones activas.
+- Informar el número de conexiones activas.
+
+El ownership queda establecido como:
+
+TCPServer → Session → Socket
+
+ConnectionManager administra las `Session` sin introducir lógica de protocolo, dominio o persistencia.
+
+### Integración
+Se añadió `test_connection_manager` al sistema de pruebas CMake.
+
+Flujo validado:
+
+TCP client → TCPServer → Socket aceptado → Session → ConnectionManager → recepción de bytes → eliminación de conexión.
+
+### Verificación
+- Compilación: correcta y sin warnings.
+- CTest: 9/9 tests PASS.
+- `git diff --check`: limpio.
+
+### Arquitectura
+`ConnectionManager` completa la gestión básica del ciclo de vida de conexiones dentro de la capa Network.
+
+Todavía no incorpora:
+- concurrencia;
+- event loop;
+- timeouts;
+- backpressure;
+- framing o buffering persistente;
+- detección de protocolos;
+- identidad IMEI/deviceId;
+- `clientId`;
+- persistencia;
+- API;
+- alertas.
+
+### Archivos
+- `backend/network/ConnectionManager.h`
+- `backend/network/ConnectionManager.cpp`
+- `tests/test_connection_manager.cpp`
+- `CMakeLists.txt`
+
+### Siguiente componente
+El siguiente trabajo de Network será el buffering/framing de TCP stream, necesario para reconstruir frames cuando una lectura contenga datos fragmentados o múltiples paquetes.
+
 ## Avance: Session
 
 ### Estado

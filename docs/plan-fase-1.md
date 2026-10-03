@@ -282,4 +282,47 @@ El framing y buffering necesario para TCP stream se implementará en la etapa co
 🟢 Completado
 
 ### Siguiente
-`ConnectionManager` permanece ⚪ Planificado.
+`ConnectionManager` → completado.
+
+## ConnectionManager — Completado
+
+### Objetivo
+Gestionar el ciclo de vida de múltiples sesiones TCP activas mediante identificadores internos de conexión.
+
+### Implementado
+- Ownership de múltiples `Session`.
+- Identificadores internos secuenciales de conexión.
+- Alta de sesiones mediante `add`.
+- Acceso mediante `get`.
+- Eliminación individual mediante `remove`.
+- Eliminación completa mediante `clear`.
+- Consulta del número de conexiones activas mediante `size`.
+- Semántica move-only heredada de `Session`.
+- Integración con CMake.
+
+### Validación
+- Build correcto.
+- Compilación sin warnings.
+- CTest: 9/9 PASS.
+- `git diff --check`: limpio.
+
+### Alcance
+`ConnectionManager` administra únicamente sesiones TCP activas.
+
+No contiene todavía:
+- detección de protocolos;
+- framing o buffering de protocolo;
+- IMEI o identidad de dispositivo;
+- `Device`, `Vehicle` o `clientId`;
+- persistencia;
+- autenticación comercial;
+- EventBus;
+- API;
+- alertas;
+- concurrencia o event loop.
+
+### Estado
+🟢 Completado
+
+### Siguiente
+La siguiente etapa de Network será definir e implementar el buffering/framing necesario para tratar TCP como stream, antes de integrar el primer protocolo GPS real.
