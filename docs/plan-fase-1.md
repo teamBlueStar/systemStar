@@ -234,3 +234,20 @@ Siguiente componente:
 Objetivo inmediato:
 
 Demostrar que systemStar puede crear un servidor TCP, escuchar en un puerto configurado, aceptar conexiones y entregar dichas conexiones a la siguiente capa sin introducir todavía lógica de protocolos GPS.
+
+## TCPServer — Completado
+
+El objetivo definido para `TCPServer` fue cumplido.
+
+`TCPServer` permite crear un servidor TCP, escuchar en un puerto, aceptar conexiones y entregar las conexiones aceptadas mediante la abstracción `Socket`, sin introducir lógica de protocolos GPS.
+
+Validación:
+- comunicación TCP cliente → servidor;
+- recepción de datos;
+- cierre correcto de la conexión;
+- test `test_tcp_server`;
+- suite CTest: 7/7 tests PASS.
+
+TCPServer queda cerrado como componente funcional de la capa Network.
+
+El siguiente componente de esta capa permanece pendiente y no se implementa en esta etapa.

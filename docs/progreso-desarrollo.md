@@ -1337,12 +1337,37 @@ Estado de Network:
 
 Packet       🟢 COMPLETADO
 Socket       🟢 COMPLETADO
-TCPServer    ⚪ SIGUIENTE
+TCPServer    🟢 COMPLETADO
 Session      ⚪
 ConnectionManager ⚪
 
-Siguiente paso:
+TCPServer fue implementado, integrado en CMake y validado mediante test_tcp_server, con 7/7 tests PASS.
 
-Implementar "TCPServer".
+## Avance: TCPServer
 
-El objetivo será demostrar que systemStar puede escuchar conexiones TCP y aceptar clientes utilizando la abstracción "Socket", manteniendo separadas las responsabilidades de servidor y transporte.
+Se implementó `TCPServer` sobre la abstracción `Socket`.
+
+El componente permite:
+- crear el servidor TCP;
+- enlazar una dirección y puerto;
+- utilizar puerto efímero durante las pruebas;
+- escuchar conexiones mediante `listen`;
+- aceptar conexiones mediante `accept`;
+- consultar el estado del servidor;
+- obtener el puerto local;
+- cerrar correctamente el servidor.
+
+Se añadió `tests/test_tcp_server.cpp` para validar la comunicación entre un cliente TCP y `TCPServer`.
+
+Validación realizada:
+- compilación correcta;
+- `test_tcp_server` PASS;
+- suite CTest: 7/7 tests PASS;
+- `git diff --check`: sin errores.
+
+Estado de Network:
+- Packet 🟢 COMPLETADO
+- Socket 🟢 COMPLETADO
+- TCPServer 🟢 COMPLETADO
+- Session ⚪
+- ConnectionManager ⚪
