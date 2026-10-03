@@ -1371,3 +1371,47 @@ Estado de Network:
 - TCPServer 🟢 COMPLETADO
 - Session ⚪
 - ConnectionManager ⚪
+
+## Avance: Session
+
+### Estado
+🟢 Completado
+
+### Implementación
+Se implementó `systemstar::Session` como representación de una conexión TCP individual.
+
+Responsabilidades actuales:
+- Poseer el `Socket` conectado.
+- Recibir bytes desde la conexión.
+- Enviar bytes hacia la conexión.
+- Exponer el estado de validez de la conexión.
+- Cerrar la conexión de forma segura.
+- Mantener ownership exclusivo del `Socket` mediante semántica move-only.
+
+`Session` no contiene lógica de protocolos GPS, persistencia, dominio, API, autenticación comercial ni alertas.
+
+### Integración
+Se añadió `test_session` al sistema de pruebas CMake.
+
+Flujo validado:
+
+TCP client → TCPServer → Socket aceptado → Session → recepción de bytes → respuesta ACK → cierre.
+
+### Verificación
+- Compilación: correcta y sin warnings.
+- CTest: 8/8 tests PASS.
+- `git diff --check`: limpio.
+
+### Arquitectura
+`Session` establece la capa de sesión entre `TCPServer` y las futuras etapas de framing/detección de protocolo.
+
+El buffering persistente y la reconstrucción de frames TCP quedan pendientes para la etapa correspondiente de framing. `Session` no interpreta todavía ningún protocolo GPS.
+
+### Archivos
+- `backend/network/Session.h`
+- `backend/network/Session.cpp`
+- `tests/test_session.cpp`
+- `CMakeLists.txt`
+
+### Siguiente componente
+`ConnectionManager` queda pendiente. No iniciado en esta etapa.

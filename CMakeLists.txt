@@ -172,6 +172,28 @@ if(SYSTEMSTAR_BUILD_TESTS)
     NAME test_tcp_server
     COMMAND test_tcp_server
 )
+
+    add_executable(test_session
+        tests/test_session.cpp
+        backend/network/Socket.cpp
+        backend/network/TCPServer.cpp
+        backend/network/Session.cpp
+    )
+
+    target_include_directories(test_session PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/backend"
+    )
+
+    if(MSVC)
+        target_compile_options(test_session PRIVATE /W4 /permissive-)
+    else()
+        target_compile_options(test_session PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(
+        NAME test_session
+        COMMAND test_session
+    )
 endif()
 
 message(STATUS "systemStar ${PROJECT_VERSION}")

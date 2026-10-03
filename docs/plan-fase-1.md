@@ -251,3 +251,35 @@ Validación:
 TCPServer queda cerrado como componente funcional de la capa Network.
 
 El siguiente componente de esta capa permanece pendiente y no se implementa en esta etapa.
+
+## Session — Completado
+
+### Objetivo
+Establecer una abstracción mínima y segura para representar una conexión TCP individual entre `TCPServer` y las futuras capas de procesamiento.
+
+### Implementado
+- Ownership exclusivo del `Socket`.
+- Semántica move-only.
+- Recepción de bytes.
+- Envío de bytes.
+- Validación del estado de la sesión.
+- Cierre seguro de la conexión.
+- Integración con CMake.
+- Test de integración TCP cliente → servidor → Session → ACK.
+
+### Validación
+- Build correcto.
+- Sin warnings.
+- CTest: 8/8 PASS.
+- `git diff --check`: limpio.
+
+### Alcance
+`Session` permanece independiente de protocolos GPS, modelos de dominio, persistencia, API, autenticación comercial y alertas.
+
+El framing y buffering necesario para TCP stream se implementará en la etapa correspondiente, sin introducir lógica de protocolo dentro de `Session`.
+
+### Estado
+🟢 Completado
+
+### Siguiente
+`ConnectionManager` permanece ⚪ Planificado.
