@@ -139,3 +139,98 @@ Componentes pendientes de Fase 1:
 1.8 Pruebas del núcleo
 
 El siguiente componente será seleccionado antes de continuar el desarrollo.
+
+29. Implementación de Socket
+
+Fecha:
+2026-10-02
+
+Componente:
+Network / Socket
+
+Estado:
+COMPLETADO
+
+Objetivo:
+
+Implementar una abstracción mínima y segura sobre sockets TCP para proporcionar la base de las siguientes capas de red de systemStar.
+
+Responsabilidad:
+
+Socket encapsula las operaciones básicas del socket TCP sin conocer protocolos GPS, framing, sesiones, persistencia, API ni lógica de dominio.
+
+Funcionalidades implementadas:
+
+- creación del socket;
+- bind a dirección y puerto;
+- listen;
+- accept;
+- connect;
+- envío de bytes;
+- recepción de bytes;
+- validación del estado del socket;
+- cierre controlado;
+- acceso al descriptor nativo cuando es necesario;
+- consulta del puerto local.
+
+Manejo de resultados:
+
+Las operaciones de envío y recepción utilizan "SocketResult", evitando depender únicamente de valores booleanos para representar el resultado de una operación de E/S.
+
+Archivos:
+
+- "backend/network/Socket.h"
+- "backend/network/Socket.cpp"
+- "tests/test_socket.cpp"
+- "CMakeLists.txt"
+
+Pruebas:
+
+Se implementó una prueba de comunicación TCP entre cliente y servidor.
+
+La prueba verifica el establecimiento de la conexión, intercambio de datos y respuesta entre ambos extremos.
+
+Validación:
+
+cmake -S . -B build       PASS
+cmake --build build       PASS
+ctest --test-dir build    PASS
+git diff --check          PASS
+
+Resultado CTest:
+
+6/6 tests passed
+0 tests failed
+100% tests passed
+
+La compilación posterior a la corrección del test no presentó los warnings inicialmente detectados.
+
+Decisión arquitectónica:
+
+Socket permanece deliberadamente limitado a transporte TCP.
+
+No contiene:
+
+- framing de protocolos;
+- detección de protocolo;
+- parsers GPS;
+- Position;
+- Device;
+- clientId;
+- persistencia;
+- autenticación de usuarios;
+- lógica comercial.
+
+Esto permite que las siguientes capas utilicen Socket sin acoplar la infraestructura de red al dominio GPS.
+
+Conclusión:
+
+Socket queda cerrado como primer componente funcional de la capa Network.
+
+Siguiente componente:
+
+"TCPServer"
+
+Objetivo inmediato:
+
+Demostrar que systemStar puede crear un servidor TCP, escuchar en un puerto configurado, aceptar conexiones y entregar dichas conexiones a la siguiente capa sin introducir todavía lógica de protocolos GPS.
