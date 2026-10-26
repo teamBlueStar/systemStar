@@ -326,3 +326,43 @@ No contiene todavía:
 
 ### Siguiente
 La siguiente etapa de Network será definir e implementar el buffering/framing necesario para tratar TCP como stream, antes de integrar el primer protocolo GPS real.
+
+
+## PacketBuffer — Completado, pendiente de integración
+
+### Objetivo
+Acumular bytes de un stream TCP con un límite de capacidad, sin asumir
+que una lectura equivale a un paquete completo ni interpretar protocolos.
+
+### Implementado
+- Acumulación de bytes en orden.
+- Límite máximo de capacidad.
+- Rechazo de append que exceda la capacidad sin modificar el contenido.
+- Consumo parcial y total de bytes.
+- Rechazo de consumo superior al contenido disponible.
+- Soporte de datos binarios, incluido `0x00`.
+- Consulta de tamaño, capacidad y estado vacío.
+- Limpieza explícita del buffer.
+- Test unitario independiente registrado en CMake.
+
+### Validación
+- Compilación: correcta.
+- CTest: 10/10 tests PASS.
+- `git diff --check`: limpio en la verificación realizada.
+
+### Alcance y pendientes
+`PacketBuffer` permanece independiente de `Session`.
+Todavía no reconstruye tramas, no detecta protocolos GPS y no está
+integrado en el flujo de recepción TCP.
+
+Quedan pendientes el framing específico basado en fixtures reales,
+la gestión de fragmentación y concatenación a nivel de protocolo,
+y la integración probada con `Session`.
+
+### Estado
+🟢 Componente aislado implementado y probado.
+🟡 Flujo TCP completo con buffering/framing pendiente.
+
+### Siguiente
+Revisar el diff y cerrar este componente antes de autorizar la integración
+con `Session`.

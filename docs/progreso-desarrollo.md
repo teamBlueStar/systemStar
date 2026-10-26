@@ -1473,4 +1473,49 @@ El buffering persistente y la reconstrucción de frames TCP quedan pendientes pa
 - `CMakeLists.txt`
 
 ### Siguiente componente
-`ConnectionManager` queda pendiente. No iniciado en esta etapa.
+En el momento de esta entrada, `ConnectionManager` quedaba pendiente. Su implementación y validación se registran en la entrada posterior dedicada a `ConnectionManager`.
+
+
+## Avance: PacketBuffer
+
+### Estado
+🟢 Implementación aislada y pruebas completadas.
+🟡 Integración con Session y framing de protocolos pendientes.
+
+### Implementación
+Se añadió `systemstar::PacketBuffer` para acumular bytes de forma acotada,
+sin incorporar reglas específicas de ningún protocolo GPS.
+
+Responsabilidades implementadas:
+- Acumular bytes en orden.
+- Aplicar un límite máximo de capacidad.
+- Rechazar escrituras que excedan el espacio disponible sin alterar
+  el contenido previo.
+- Consumir una cantidad parcial o total de bytes.
+- Rechazar consumos superiores al tamaño actual.
+- Conservar bytes binarios, incluido `0x00`.
+- Consultar tamaño y capacidad, y limpiar el contenido.
+
+### Pruebas e integración de build
+Se añadió `test_packet_buffer` a CMake.
+
+Verificación observada:
+- `cmake -S . -B build`: configuración correcta.
+- `cmake --build build`: compilación completada.
+- CTest: 10/10 tests PASS.
+- `git diff --check`: sin errores reportados.
+
+### Archivos
+- `backend/network/PacketBuffer.h`
+- `backend/network/PacketBuffer.cpp`
+- `tests/test_packet_buffer.cpp`
+- `CMakeLists.txt`
+
+### Límites actuales
+`PacketBuffer` todavía no está integrado en `Session`.
+No extrae tramas ni identifica protocolos. El framing deberá diseñarse
+con evidencia de fixtures reales del repositorio.
+
+### Siguiente paso
+Revisión final del diff y cierre del componente antes de decidir si se
+autoriza la integración con `Session`.

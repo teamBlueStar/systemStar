@@ -217,6 +217,26 @@ if(SYSTEMSTAR_BUILD_TESTS)
         NAME test_connection_manager
         COMMAND test_connection_manager
     )
+
+    add_executable(test_packet_buffer
+        tests/test_packet_buffer.cpp
+        backend/network/PacketBuffer.cpp
+    )
+
+    target_include_directories(test_packet_buffer PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/backend"
+    )
+
+    if(MSVC)
+        target_compile_options(test_packet_buffer PRIVATE /W4 /permissive-)
+    else()
+        target_compile_options(test_packet_buffer PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+
+    add_test(
+        NAME test_packet_buffer
+        COMMAND test_packet_buffer
+    )
 endif()
 
 message(STATUS "systemStar ${PROJECT_VERSION}")
